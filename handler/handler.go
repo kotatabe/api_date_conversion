@@ -17,7 +17,10 @@ type Response struct {
 }
 
 func HandleBizDay(w http.ResponseWriter, r *http.Request) {
-	days, _ := strconv.Atoi(r.FormValue("days"))
+	days, err := strconv.Atoi(r.FormValue("days"))
+	if err != nil {
+		fmt.Printf("%+v\n", xerrors.Errorf(": %w", err))
+	}
 	biz_days := utils.CountBizDayInDays(days)
 	resp, err := json.Marshal(Response{biz_days})
 
