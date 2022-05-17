@@ -1,0 +1,6 @@
+github.com/go-chi/chi v1.5.4 h1:QHdzF2szwjqVV4wmByUnTcsbIg7UGaQ0tPF2t5GcAIs=
+github.com/go-chi/chi v1.5.4/go.mod h1:uaf8YgoFazUOkPBG7fxPftUylNumIev9awIWOENIuEg=
+github.com/najeira/jpholiday v0.0.0-20201205051200-308d6dc577e8 h1:Oo+Ls77WfNMzXJMwASTWEzXwONE8LwVGEYT1JVHojb0=
+github.com/najeira/jpholiday v0.0.0-20201205051200-308d6dc577e8/go.mod h1:Uild+vOZefxLz2XTlaB7GAAm27xPTpUH4hggIyWTJaE=
+golang.org/x/xerrors v0.0.0-20220411194840-2f41105eb62f h1:GGU+dLjvlC3qDwqYgL6UgRmHXhOOgns0bZu2Ty5mm6U=
+golang.org/x/xerrors v0.0.0-20220411194840-2f41105eb62f/go.mod h1:I/5z698sn9Ka8TeJc9MKroUUfqBBauWjQqLJ2OPfmY0=
