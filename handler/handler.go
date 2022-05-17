@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"time"
 	"golang.org/x/xerrors"
-	"github.com/kotatabe/api_date_conversion/utils"
+	"github.com/kotatabe/api_date_conversion/handler/utils"
 )
 
 type Response struct {
