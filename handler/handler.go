@@ -7,18 +7,19 @@ import (
 	"net/http"
 	"strconv"
 	"time"
-	"golang.org/x/xerrors"
+
 	"github.com/kotatabe/api_date_conversion/handler/utils"
+	"golang.org/x/xerrors"
 )
 
 type Response struct {
 	Bizday int `json:"bizday"`
 }
 
-func handleBizDay(w http.ResponseWriter, r *http.Request) {
+func HandleBizDay(w http.ResponseWriter, r *http.Request) {
 	days, _ := strconv.Atoi(r.FormValue("days"))
-	bdays := utils.countBizDayInDays(days)
-	resp, err := json.Marshal(Response{bdays})
+	biz_days := utils.CountBizDayInDays(days)
+	resp, err := json.Marshal(Response{biz_days})
 
 	if err != nil {
 		fmt.Printf("%+v\n", xerrors.Errorf(": %w", err))
@@ -28,13 +29,13 @@ func handleBizDay(w http.ResponseWriter, r *http.Request) {
 	w.Write(resp)
 }
 
-func handleIsWeekday(w http.ResponseWriter, r *http.Request) {
+func HandleIsWeekday(w http.ResponseWriter, r *http.Request) {
 
 	t, err := time.Parse("2006-1-2", r.FormValue("date"))
 	if err != nil {
 		fmt.Printf("%+v\n", xerrors.Errorf(": %w", err))
 	}
-	if utils.isWeekend(t) {
+	if utils.IsWeekend(t) {
 		log.Println("That day is weekend")
 		return
 	}

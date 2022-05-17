@@ -12,8 +12,8 @@ func main() {
 	r := chi.NewRouter()
 
 	r.Route("/", func(r chi.Router) {
-		r.Post("/is-weekday", handler.handleIsWeekday)
-		r.Post("/biz-day", handler.handleBizDay)
+		r.Post("/is-weekday", handler.HandleIsWeekday)
+		r.Post("/biz-day", handler.HandleBizDay)
 	})
 
 	log.Println("Listening...")
