@@ -12,7 +12,7 @@ func main() {
 	r := chi.NewRouter()
 
 	r.Route("/", func(r chi.Router) {
-		r.Post("/is-weekday", handler.HandleIsWeekday)
+		r.Post("/is-weekday", handler.HandleIsWeekend)
 		r.Post("/biz-day", handler.HandleBizDay)
 	})
 

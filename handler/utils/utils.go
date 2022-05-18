@@ -7,7 +7,10 @@ import (
 	holiday "github.com/najeira/jpholiday"
 )
 
-func IsWeekend(t time.Time) bool {
+type Date struct {}
+
+
+func (d *Date) IsWeekend(t time.Time) bool {
 	dayOfWeek := t.Weekday()
 	if dayOfWeek == time.Saturday || dayOfWeek == time.Sunday {
 		return true
@@ -15,22 +18,19 @@ func IsWeekend(t time.Time) bool {
 	return false
 }
 
-func isHoliday(t time.Time) bool {
+func (d *Date) isHoliday(t time.Time) bool {
 	return holiday.Name(t) != ""
 }
 
-func CountBizDayInDays(days int) int {
+func CountBizDayFromToday(days int) int {
 	t := time.Now()
+	d := Date{}
 
-	//今日も日数に含む
 	count := 0
-
 	for i := 0; i < days; i++ {
-		if IsWeekend(t) || isHoliday(t) {
-			t = t.Add(time.Hour * 24)
-			continue
+		if !d.IsWeekend(t) && !d.isHoliday(t) {
+			count++
 		}
-		count++
 		t = t.Add(time.Hour * 24)
 	}
 	log.Println("count is", count)
