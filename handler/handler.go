@@ -3,13 +3,11 @@ package handler
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 	"strconv"
 	"time"
 
 	"github.com/kotatabe/api_date_conversion/handler/utils"
-	"golang.org/x/xerrors"
 )
 
 type ResponseBizDay struct {
@@ -17,14 +15,14 @@ type ResponseBizDay struct {
 }
 
 type ResponseIsWeekend struct {
-	is_weekend bool `json:"isWeekend"`
+	Is_weekend bool `json:"isWeekend"`
 }
 
 func HandleBizDay(w http.ResponseWriter, r *http.Request) {
 	days, err := strconv.Atoi(r.FormValue("days"))
 	if err != nil {
-		fmt.Printf("%+v\n", xerrors.Errorf(": %w", err))
-		http.Error(w, fmt.Sprintf("...: %w", err), http.StatusInternalServerError)
+		fmt.Printf("%+v\n", fmt.Errorf(": %w", err))
+		http.Error(w, "400 Status Bad Request", http.StatusBadRequest)
 		return
 	}
 
@@ -32,8 +30,8 @@ func HandleBizDay(w http.ResponseWriter, r *http.Request) {
 
 	resp, err := json.Marshal(ResponseBizDay{biz_days})
 	if err != nil {
-		fmt.Printf("%+v\n", xerrors.Errorf(": %w", err))
-		http.Error(w, fmt.Sprintf("...: %w", err), http.StatusInternalServerError)
+		fmt.Printf("%+v\n", fmt.Errorf(": %w", err))
+		http.Error(w, "400 Status Bad Request", http.StatusBadRequest)
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
@@ -41,20 +39,19 @@ func HandleBizDay(w http.ResponseWriter, r *http.Request) {
 }
 
 func HandleIsWeekend(w http.ResponseWriter, r *http.Request) {
-	d := utils.Date{}
-	t, err := time.Parse("2006-1-2", r.FormValue("date"))
+	date, err := time.Parse("2006-1-2", r.FormValue("date"))
 	if err != nil {
-		fmt.Printf("%+v\n", xerrors.Errorf(": %w", err))
-		http.Error(w, fmt.Sprintf("...: %w", err), http.StatusInternalServerError)
+		fmt.Printf("%+v\n", fmt.Errorf(": %w", err))
+		http.Error(w, "400 Status Bad Request", http.StatusBadRequest)
 		return
 	}
 
-	is_weekend := d.IsWeekend(t)
-	log.Println(is_weekend)
+	d := utils.Date{T: date}
+	is_weekend := d.IsWeekend()
 	resp, err := json.Marshal(ResponseIsWeekend{is_weekend})
 	if err != nil {
-		fmt.Printf("%+v\n", xerrors.Errorf(": %w", err))
-		http.Error(w, fmt.Sprintf("...: %w", err), http.StatusInternalServerError)
+		fmt.Printf("%+v\n", fmt.Errorf(": %w", err))
+		http.Error(w, "400 Status Bad Request", http.StatusBadRequest)
 		return
 	}
 
